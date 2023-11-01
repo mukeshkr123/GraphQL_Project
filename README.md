@@ -15,8 +15,8 @@ type User {
   age: Int
   height: Float!
   isMarried: Boolean
-  friends: [User]
-  videosPosted: [Video]
+  friends: [User!]
+  videosPosted: [Video!]
 }
 ```
 
@@ -54,7 +54,7 @@ In the `Video` type definition:
 
 - `description: String!`: The video description is also a required string.
 
-## Explanation
+### Explanation
 
 - GraphQL types are defined using the `type` keyword, followed by the type name (e.g., `User` or `Video`).
 
@@ -67,3 +67,61 @@ In the `Video` type definition:
 - Lists of types can be represented using square brackets (e.g., `[User]` and `[Video]`), indicating a one-to-many relationship.
 
 - Types can have relationships with other types, as shown by the `friends` and `videosPosted` fields in the `User` type.
+
+## Basic GraphQL Query
+
+In GraphQL, queries are used to request specific data from your API. Here's a basic GraphQL query that fetches information about a country with the code "US."
+
+```graphql
+query GetCountry {
+  country(code: "US") {
+    name
+    native
+    capital
+    emoji
+    currency
+    languages {
+      code
+      name
+    }
+  }
+}
+```
+
+Let's break down this query and explain each part:
+
+- `query GetCountry`: This line declares a GraphQL query named "GetCountry." Queries are named for identification and documentation purposes.
+
+- `country(code: "US")`: This line specifies that we want to fetch information about a country with the code "US." It's like calling a function with arguments in GraphQL. "country" is a field, and we're passing an argument, "code," with the value "US" to it.
+
+- The following lines within the `country` block specify the fields we want to retrieve about the country:
+
+  - `name`: Request the name of the country.
+
+  - `native`: Request the native name of the country.
+
+  - `capital`: Request the capital city of the country.
+
+  - `emoji`: Request the country's emoji flag.
+
+  - `currency`: Request the currency used in the country.
+
+  - `languages`: Request information about the languages spoken in the country. It's a list of objects with fields `code` and `name` for each language.
+
+So, when you execute this query, you'll get a response containing the requested information about the United States or any other country with the code "US." This is a simplified example of how GraphQL queries work, allowing you to precisely specify the data you need and avoid over-fetching or under-fetching data from your API.
+
+```graphql
+query GetCountry {
+  country(code: "US") {
+    name
+    native
+    capital
+    emoji
+    currency
+    languages {
+      code
+      name
+    }
+  }
+}
+```
