@@ -108,20 +108,32 @@ Let's break down this query and explain each part:
 
   - `languages`: Request information about the languages spoken in the country. It's a list of objects with fields `code` and `name` for each language.
 
-So, when you execute this query, you'll get a response containing the requested information about the United States or any other country with the code "US." This is a simplified example of how GraphQL queries work, allowing you to precisely specify the data you need and avoid over-fetching or under-fetching data from your API.
+**Install Apollo** - `npm install apollo-server graphql`
 
-```graphql
-query GetCountry {
-  country(code: "US") {
-    name
-    native
-    capital
-    emoji
-    currency
-    languages {
-      code
-      name
-    }
+### Create a Apollo server
+
+```js
+const { ApolloServer, gql } = require("apollo-server");
+
+// Define your schema using the gql template literal
+const typeDefs = gql`
+  type Query {
+    hello: String
   }
-}
+`;
+
+// Define your resolver functions
+const resolvers = {
+  Query: {
+    hello: () => "Hello, World!",
+  },
+};
+
+// Create the Apollo Server instance
+const server = new ApolloServer({ typeDefs, resolvers });
+
+// Start the server
+server.listen().then(({ url }) => {
+  console.log(`Server ready at ${url}`);
+});
 ```
