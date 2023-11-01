@@ -12,11 +12,21 @@ const typeDefs = gql`
     friends: [User]
   }
 
+  type Movie {
+    id: ID!
+    name: String!
+    yearOfPublication: Int!
+    isInTheaters: Boolean!
+  }
+
   # Query type defines the available queries for the API.
 
   type Query {
     # users query returns a list of users.
     users: [User!]!
+    user(id: ID!): User!
+    movies: [Movie!]!
+    movie(name: String!): Movie!
   }
 
   # crete enums

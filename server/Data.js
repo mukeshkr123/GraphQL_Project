@@ -185,4 +185,67 @@ const UserList = [
   },
 ];
 
-module.exports = { UserList };
+const Movies = [
+  {
+    id: 1,
+    name: "The Matrix",
+    yearOfPublication: 1999,
+    isInTheaters: false,
+  },
+  {
+    id: 2,
+    name: "Inception",
+    yearOfPublication: 2010,
+    isInTheaters: false,
+  },
+  {
+    id: 3,
+    name: "Jurassic Park",
+    yearOfPublication: 1993,
+    isInTheaters: false,
+  },
+  {
+    id: 4,
+    name: "Avatar",
+    yearOfPublication: 2009,
+    isInTheaters: false,
+  },
+  {
+    id: 5,
+    name: "Titanic",
+    yearOfPublication: 1997,
+    isInTheaters: false,
+  },
+  {
+    id: 6,
+    name: "The Dark Knight",
+    yearOfPublication: 2008,
+    isInTheaters: false,
+  },
+  {
+    id: 7,
+    name: "Gladiator",
+    yearOfPublication: 2000,
+    isInTheaters: false,
+  },
+  {
+    id: 8,
+    name: "The Shawshank Redemption",
+    yearOfPublication: 1994,
+    isInTheaters: false,
+  },
+  {
+    id: 9,
+    name: "Forrest Gump",
+    yearOfPublication: 1994,
+    isInTheaters: false,
+  },
+  {
+    id: 10,
+    name: "Pulp Fiction",
+    yearOfPublication: 1994,
+    isInTheaters: false,
+  },
+];
+
+module.exports = { UserList, Movies };
