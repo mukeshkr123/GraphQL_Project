@@ -9,6 +9,7 @@ const typeDefs = gql`
     username: String!
     age: Int!
     nationality: String!
+    friends: [User]
   }
 
   # Query type defines the available queries for the API.
@@ -16,6 +17,14 @@ const typeDefs = gql`
   type Query {
     # users query returns a list of users.
     users: [User!]!
+  }
+
+  # crete enums
+  enum Nationality {
+    UK
+    US
+    CA
+    AU
   }
 `;
 
