@@ -110,9 +110,11 @@ Let's break down this query and explain each part:
 
 **Install Apollo** - `npm install apollo-server graphql`
 
-### Create a Apollo server
+## Basic Apollo Server Setup
 
-```js
+Here's the code for creating a basic Apollo Server:
+
+```javascript
 const { ApolloServer, gql } = require("apollo-server");
 
 // Define your schema using the gql template literal
@@ -136,4 +138,47 @@ const server = new ApolloServer({ typeDefs, resolvers });
 server.listen().then(({ url }) => {
   console.log(`Server ready at ${url}`);
 });
+```
+
+In this code, we:
+
+1. Import the necessary modules, including `ApolloServer` and `gql` from "apollo-server."
+
+2. Define a simple GraphQL schema using the `gql` template literal. In this case, we define a single "Query" type with a "hello" field that returns a string.
+
+3. Create resolver functions for the "Query" type to handle the request for the "hello" field.
+
+4. Initialize an Apollo Server with the defined schema and resolvers.
+
+5. Start the server, which will be available at the specified URL.
+
+### Adding More Complex Schema Definitions
+
+To create a more sophisticated GraphQL schema, you can define custom types and queries. Here's an example:
+
+**Create `typeDefs.js` for More Complex Schema:**
+
+```javascript
+const { gql } = require("apollo-server");
+
+const typeDefs = gql`
+  # User type represents information about a user.
+
+  type User {
+    id: ID!
+    name: String!
+    username: String!
+    age: Int!
+    nationality: String!
+  }
+
+  # Query type defines the available queries for the API.
+
+  type Query {
+    # users query returns a list of users.
+    users: [User!]!
+  }
+`;
+
+module.exports = typeDefs;
 ```
