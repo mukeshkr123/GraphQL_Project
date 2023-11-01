@@ -182,3 +182,19 @@ const typeDefs = gql`
 
 module.exports = typeDefs;
 ```
+
+**Create `resolvers.js` for More Complex Schema:**
+
+```javascript
+const { UserList } = require("../Data");
+
+const resolvers = {
+  Query: {
+    users() {
+      return UserList;
+    },
+  },
+};
+
+module.exports = { resolvers };
+```

@@ -1,18 +1,7 @@
 const { ApolloServer, gql } = require("apollo-server");
-
-// Define your schema using the gql template literal
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-// Define your resolver functions
-const resolvers = {
-  Query: {
-    hello: () => "Hello, World!",
-  },
-};
+const { typeDefs } = require("./schema/type-defs");
+const { resolvers } = require("./schema/resolvers");
+resolvers;
 
 // Create the Apollo Server instance
 const server = new ApolloServer({ typeDefs, resolvers });
