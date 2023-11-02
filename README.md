@@ -198,3 +198,49 @@ const resolvers = {
 
 module.exports = { resolvers };
 ```
+
+### Creating Mutations
+
+**Create `typeDefs.js` for More Complex Schema:**
+
+```javascript
+const { gql } = require("apollo-server");
+
+const typeDefs = gql`
+  # Mutations
+  input CreateUserInput {
+    name: String! # User's name.
+    username: String! # User's username.
+    age: Int! # User's age.
+    nationality: Nationality = UK # User's nationality, defaults to UK.
+  }
+
+  type Mutation {
+    # createUser mutation creates a new user with the provided input.
+    createUser(input: CreateUserInput): User
+  }
+`;
+
+module.exports = typeDefs;
+```
+
+**Create `resolvers.js` for More Complex Schema:**
+
+```javascript
+const { UserList } = require("../Data");
+
+const resolvers = {
+  Mutation: {
+    createUser: (parent, args) => {
+      const user = args.input;
+      // Generate a unique ID for the new user.
+      const lastId = UserList.length > 0 ? UserList[UserList.length - 1].id : 0;
+      user.id = lastId + 1;
+      UserList.push(user);
+      return user;
+    },
+  },
+};
+
+module.exports = { resolvers };
+```
