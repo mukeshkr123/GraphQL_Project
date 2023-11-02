@@ -1,0 +1,33 @@
+/* Reset some default browser styles for the navbar */
+body,
+nav,
+ul,
+li,
+a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Style the navbar */
+.navbar {
+  background-color: #0077b6; /* Blue background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+/* Style the navigation links */
+.nav-link {
+  color: #fff; /* White text color */
+  font-size: 1.2rem; /* Font size */
+  margin: 0 20px; /* Add some spacing between links */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+/* Change link color on hover */
+.nav-link:hover {
+  color: #f94144; /* Red text color on hover */
+}

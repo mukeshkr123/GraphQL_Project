@@ -1,5 +1,4 @@
 import { useQuery, gql } from "@apollo/client";
-import "./UserLists.css"; // Import your CSS for styling.
 
 // Define the GraphQL query to fetch all users.
 const QUERY_ALL_USERS = gql`
@@ -13,7 +12,7 @@ const QUERY_ALL_USERS = gql`
   }
 `;
 
-const UsersList = () => {
+const MoviesList = () => {
   // Execute the query using useQuery from Apollo Client.
   const { data, loading, error } = useQuery(QUERY_ALL_USERS);
 
@@ -39,4 +38,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default MoviesList;
