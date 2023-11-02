@@ -54,6 +54,9 @@ const typeDefs = gql`
 
     # updateUsername mutation updates a user's username.
     updateUsername(input: UpdateUsernameInput!): User
+
+    # deleteUser mutation deletes a user by ID.
+    deleteUser(id: ID!): User
   }
 
   # Enums
