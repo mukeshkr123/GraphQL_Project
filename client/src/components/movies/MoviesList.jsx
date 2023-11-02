@@ -1,40 +1,73 @@
-import { useQuery, gql } from "@apollo/client";
+import { useState } from "react";
+import { useQuery, gql, useLazyQuery } from "@apollo/client";
+import "./MoviesList.css"; // Import your CSS for styling.
 
-// Define the GraphQL query to fetch all users.
-const QUERY_ALL_USERS = gql`
-  query GetAllUsers {
-    users {
+const GET_ALL_MOVIES = gql`
+  query Movies {
+    movies {
       id
       name
-      age
-      username
+      yearOfPublication
+      isInTheaters
+    }
+  }
+`;
+
+const GET_MOVIE_BY_NAME = gql`
+  query Movie($name: String!) {
+    movie(name: $name) {
+      name
+      yearOfPublication
     }
   }
 `;
 
 const MoviesList = () => {
-  // Execute the query using useQuery from Apollo Client.
-  const { data, loading, error } = useQuery(QUERY_ALL_USERS);
+  const [movieSearched, setMovieSearched] = useState("");
+  const [showMovie, setShowMovie] = useState(false); // Track if a movie is fetched
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  const { data: moviesData } = useQuery(GET_ALL_MOVIES);
+  const [fetchMovie, { data, error }] = useLazyQuery(GET_MOVIE_BY_NAME);
 
-  if (error) {
-    console.error("Error fetching users:", error.message);
-    return <p>Error loading users.</p>;
-  }
+  const handleSearch = () => {
+    if (movieSearched) {
+      fetchMovie({
+        variables: {
+          name: movieSearched,
+        },
+      });
+      setShowMovie(true);
+    }
+  };
 
   return (
-    <div className="user-list">
-      {data.users.map((user) => (
-        <div key={user.id} className="user-card">
-          <h1 className="user-name">Name: {user.name}</h1>
-          <p className="user-age">Age: {user.age}</p>
-          <p className="user-username">Username: {user.username}</p>
+    <>
+      {moviesData && <h1>Total Movies: {moviesData.movies.length}</h1>}
+      <div>
+        <input
+          type="text"
+          placeholder="Search Movies...."
+          onChange={(e) => setMovieSearched(e.target.value)}
+        />
+        <button onClick={handleSearch}>Fetch Movies</button>
+      </div>
+      {showMovie && (
+        <div className="movies-list">
+          {data && data.movie ? (
+            <div>
+              <h1 className="movie-name">Name: {data.movie.name}</h1>
+              <p className="movie-year">
+                Year of Publication: {data.movie.yearOfPublication}
+              </p>
+            </div>
+          ) : error ? (
+            <p>There was an error in fetching data</p>
+          ) : (
+            <p>No movie found with the provided name</p>
+          )}
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 
