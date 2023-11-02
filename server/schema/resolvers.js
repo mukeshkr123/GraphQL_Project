@@ -44,6 +44,20 @@ const resolvers = {
       UserList.push(user);
       return user;
     },
+
+    updateUsername: (parent, args) => {
+      const { id, newUsername } = args.input;
+      let updatedUser = null; // Initialize with null.
+
+      UserList.forEach((user) => {
+        if (user.id === id) {
+          user.username = newUsername;
+          updatedUser = user;
+        }
+      });
+
+      return updatedUser;
+    },
   },
 };
 

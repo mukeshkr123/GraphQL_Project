@@ -43,9 +43,17 @@ const typeDefs = gql`
     nationality: Nationality = UK # User's nationality, defaults to UK.
   }
 
+  input UpdateUsernameInput {
+    id: ID! # ID of the user to update.
+    newUsername: String! # User's new username.
+  }
+
   type Mutation {
     # createUser mutation creates a new user with the provided input.
-    createUser(input: CreateUserInput): User
+    createUser(input: CreateUserInput!): User
+
+    # updateUsername mutation updates a user's username.
+    updateUsername(input: UpdateUsernameInput!): User
   }
 
   # Enums

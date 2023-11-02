@@ -217,7 +217,7 @@ const typeDefs = gql`
 
   type Mutation {
     # createUser mutation creates a new user with the provided input.
-    createUser(input: CreateUserInput): User
+    createUser(input: CreateUserInput!): User
   }
 `;
 
