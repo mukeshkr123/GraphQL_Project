@@ -1,5 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import UsersList from "./components/UsersList";
+import UsersList from "./components/users/UsersList";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {
   // Create an Apollo Client instance for making GraphQL queries.
@@ -11,7 +12,11 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       {/* Render the UsersList component within the ApolloProvider. */}
-      <UsersList />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<UsersList />} />
+        </Routes>
+      </BrowserRouter>
     </ApolloProvider>
   );
 };
